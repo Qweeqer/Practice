@@ -2,20 +2,20 @@
   "name": "practice",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://Qweeqer.github.io/practice",
+  "homepage": "https://qweeqer.github.io/practice",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /practice/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Qweeqer/practice.git"
+    "url": "git+https://github.com/qweeqer/practice.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Qweeqer/practice/"
+    "url": "https://github.com/qweeqer/practice/"
   },
   "dependencies": {
     "modern-normalize": "^1.1.0"
