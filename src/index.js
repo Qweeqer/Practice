@@ -15,12 +15,12 @@
 // numbers.forEach(function (number, index) {
 //   console.log(`Індекс ${index}, значення ${number}`);
 // });
-let arr = [1, 3, 5, "a", "b", 7, 9, "n", "Ac", "bC", 12, 111, 888, 66, 77, 17]
-const sortArr = [...arr].filter((a, b) => a - b);
-const sortArr2 = [...arr].sort((a, b) => a - b);
+// let arr = [1, 3, 5, "a", "b", 7, 9, "n", "Ac", "bC", 12, 111, 888, 66, 77, 17]
+// const sortArr = [...arr].filter((a, b) => a - b);
+// const sortArr2 = [...arr].sort((a, b) => a - b);
 
-console.log('sortArr', sortArr);
-console.log('sortArr2', sortArr2);
+// console.log('sortArr', sortArr);
+// console.log('sortArr2', sortArr2);
 // const students = ["Віка", 1, "Андрій", "Олег", "Юля", "Борис", "Катя"];
 
 // const inAlphabetOrder = [...students].sort((a, b) => a.localeCompare(b));

@@ -1,6 +1,6 @@
 // task2
 // Реалізувати функцію знаходження факторіалу числа за допомогою циклу та рекурсивної функції.
-// Дослідити швидкодію виконання за допомогою методу time() об'єкта console. 
+// Дослідити швидкодію виконання за допомогою методу time() об'єкта console.
 // Зробити виклик для різних вхідних параметрів(4, 6, 13, 20).
 // Що буде результатом виконання ?
 
@@ -13,17 +13,17 @@
 // console.log('factorial(13)', factorial(13));
 // console.timeEnd('factorial');
 
-function factorialLoop(fact) {
-  let result = 1;
-  for (let i = 2; i <= fact; i++){
-        result *= i;
-    }
-    return result;
-}
+// function factorialLoop(fact) {
+//   let result = 1;
+//   for (let i = 2; i <= fact; i++){
+//         result *= i;
+//     }
+//     return result;
+// }
 
-console.time('factorialLoop');
-console.log('factorialLoop(13)', factorialLoop(13));
-console.timeEnd('factorialLoop');
+// console.time('factorialLoop');
+// console.log('factorialLoop(13)', factorialLoop(13));
+// console.timeEnd('factorialLoop');
 
 // task5
 // Дано структуру функцій:
