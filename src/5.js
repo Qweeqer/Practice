@@ -12,9 +12,11 @@ circles.forEach(circle => {
   const animationClass = circle.getAttribute('data-anim');
   //3 - вибране значення додати як клас за допомогою classList до цього елемента.
   circle.classList.add(animationClass);
+  //4 - Перевірка, чи застосувались анімації
+  console.log(circle.classList.contains(circle.getAttribute('data-anim')));
 });
 
 //4 - Перевірка, чи застосувались анімації
-circles.forEach(circle => {
-  console.log(circle.classList.contains(circle.getAttribute('data-anim')));
-});
+// circles.forEach(circle => {
+//   console.log(circle.classList.contains(circle.getAttribute('data-anim')));
+// });
