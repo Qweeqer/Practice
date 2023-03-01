@@ -132,6 +132,7 @@
   </head>
 
   <body>
+    <p><a class="button" href="../index.html">Go back</a></p>
     <div class="box">
       <div class="items">
         <div class="cirkle" data-anim="zoom-in">
@@ -178,12 +179,13 @@
         circles.forEach(circle => {
           const animationClass = circle.dataset.anim;
           circle.classList.add(animationClass);
+          // circle.classList.contains(animationClass)
         });
 
         // Перевірка, чи застосувались анімації
         circles.forEach(circle => {
           console.log(
-            circle.classList.contains(animationClass)
+            circle.classList.contains(circle.dataset.anim)
           );
         });
       }
