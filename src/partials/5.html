@@ -189,14 +189,15 @@
           circle.classList.add(animationClass);
           // circle.classList.contains(animationClass)
         });
-        //Слухач на клік
-        applyAnimationsBtn.addEventListener('click', applyAnimations);
-
+        
         // Перевірка, чи застосувались анімації
         circles.forEach(circle => {
           console.log(circle.classList.contains(circle.dataset.anim));
         });
       }
+      //Слухач на клік
+      applyAnimationsBtn.addEventListener('click', applyAnimations);
+      
       // Видалення класу
       const removeButton = document.getElementById('remove-animation');
       removeButton.addEventListener('click', () => {
