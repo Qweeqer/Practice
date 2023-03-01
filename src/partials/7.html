@@ -1,22 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <style>
+      .window {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 400px;
+        background-color: #fff;
+        border: 1px solid #000;
+      }
+
+      .window-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #000;
+        color: #fff;
+      }
+      .window-header span {
+        font-size: 1.25rem;
+      }
+      .window-title {
+        font-size: 20px;
+      }
+
+      .window-close {
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .window-close:hover {
+        color: black;
+      }
+      .window-content {
+        padding: 0px;
+      }
+
+      pre {
+        margin: 0px;
+        padding: 0px;
+        background-color: #d4d2d2;
+        border: 2px solid black;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 16px;
+      }
+      /* Стилі для кнопки та поля введення */
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .form-group input[type='text'] {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #d9d9d9;
+        border-radius: 2px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .button {
+        display: inline-block;
+        background-color: #0078d4;
+        color: white;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      .button:hover {
+        background-color: #005a9e;
+      }
+    </style>
+  </head>
+  <body>
     <p><a class="button" href="../index.html">Go back</a></p>
+
     <div class="window">
-  <div class="window-header">
-    <span class="window-title">JavaScript код на сторінці</span>
-    <button class="window-close">&times;</button>
-  </div>
-  <div class="window-content">
-    <pre><code id="js-code"></code></pre>
-  </div>
-</div>
-<script type="module" src="../7.js"></script>
-</body>
+      <div class="window-header">
+        <span class="window-title">JavaScript код на сторінці</span>
+        <button class="window-close">&times;</button>
+      </div>
+      <div class="window-content">
+        <pre><code id="js-code"></code></pre>
+      </div>
+    </div>
+    <script type="module" src="../7.js"></script>
+  </body>
 </html>
