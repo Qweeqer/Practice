@@ -187,23 +187,24 @@
         circles.forEach(circle => {
           const animationClass = circle.dataset.anim;
           circle.classList.add(animationClass);
-          // circle.classList.contains(animationClass)
+          console.log("Чи застосувались анімації:", circle.classList.contains(animationClass));
         });
         
         // Перевірка, чи застосувались анімації
-        circles.forEach(circle => {
-          console.log(circle.classList.contains(circle.dataset.anim));
-        });
+        // circles.forEach(circle => {
+        //   console.log(circle.classList.contains(circle.dataset.anim));
+        // });
       }
       //Слухач на клік
       applyAnimationsBtn.addEventListener('click', applyAnimations);
-      
+
       // Видалення класу
       const removeButton = document.getElementById('remove-animation');
       removeButton.addEventListener('click', () => {
         circles.forEach(circle => {
           const animationClass = circle.dataset.anim;
           circle.classList.remove(animationClass);
+          console.log("Чи видалились класи анімації:", !circle.classList.contains(animationClass));
         });
       });
     </script>
