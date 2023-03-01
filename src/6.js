@@ -1,9 +1,10 @@
 const env = Object.freeze({
   FORMSPREE_KEY: 'https://formspree.io/f/xeqwkgka',
-  // add other keys and values from your .env file here
+  // add other keys and values from .env file here
 });
 
 const form = document.getElementById('contact-form');
+// console.log('form', form);
 form.addEventListener('submit', event => {
   event.preventDefault();
   const formData = new FormData(form);
