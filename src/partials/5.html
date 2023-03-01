@@ -112,10 +112,14 @@
         }
       }
       /* <---Button styles ----> */
-      #apply-animations {
-          display: flex;
-          padding: 16px 16px;
-        margin: 0 auto;
+      .buttonBox {
+        display: flex;
+        justify-content: space-evenly;
+      }
+      #apply-animations,
+      #remove-animation {
+        padding: 20px 20px;
+        /* margin: 0 auto; */
         background-color: #007bff;
         color: #fff;
         font-size: 16px;
@@ -125,7 +129,8 @@
         transition: background-color 0.2s ease;
       }
 
-      #apply-animations:hover {
+      #apply-animations:hover,
+      #remove-animation:hover {
         background-color: #0062cc;
       }
     </style>
@@ -170,7 +175,10 @@
       </div>
     </div>
 
-    <button id="apply-animations">Apply Animations</button>
+    <div class="buttonBox">
+      <button id="apply-animations">Apply Animations</button>
+      <button id="remove-animation">Remove Animation</button>
+    </div>
     <script>
       const applyAnimationsBtn = document.getElementById('apply-animations');
       const circles = document.querySelectorAll('.cirkle');
@@ -181,16 +189,22 @@
           circle.classList.add(animationClass);
           // circle.classList.contains(animationClass)
         });
+        //Слухач на клік
+        applyAnimationsBtn.addEventListener('click', applyAnimations);
 
         // Перевірка, чи застосувались анімації
         circles.forEach(circle => {
-          console.log(
-            circle.classList.contains(circle.dataset.anim)
-          );
+          console.log(circle.classList.contains(circle.dataset.anim));
         });
       }
-
-      applyAnimationsBtn.addEventListener('click', applyAnimations);
+      // Видалення класу
+      const removeButton = document.getElementById('remove-animation');
+      removeButton.addEventListener('click', () => {
+        circles.forEach(circle => {
+          const animationClass = circle.dataset.anim;
+          circle.classList.remove(animationClass);
+        });
+      });
     </script>
   </body>
 </html>
