@@ -176,14 +176,14 @@
 
       function applyAnimations() {
         circles.forEach(circle => {
-          const animationClass = circle.getAttribute('data-anim');
+          const animationClass = circle.dataset.anim;
           circle.classList.add(animationClass);
         });
 
         // Перевірка, чи застосувались анімації
         circles.forEach(circle => {
           console.log(
-            circle.classList.contains(circle.getAttribute('data-anim'))
+            circle.classList.contains(animationClass)
           );
         });
       }
