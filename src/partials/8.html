@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #cnv1 {
+        width: 400px;
+        height: 400px;
+        border: 3px solid black;
+        margin: 40px;
+        background-color: #fff;
+      }
+      button:active {
+        border: 5px solid blue;
+      }
+      .board-wrap {
+        width: 100%;
+        background-color: #f6d877;
+        display: flex;
+        flex-flow: row-reverse;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn-wrap {
+        height: 400px;
+        padding: 10px;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .btn-wrap input {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <p><a class="button" href="../index.html">Go back</a></p>
+
+    <div class="board-wrap">
+      <canvas id="cnv1" width="400" height="400"></canvas>
+      <div class="btn-wrap">
+        <input type="color" id="color" />
+        <input type="button" id="clearCanvas" value="Clear Canvas" />
+        <input type="button" id="eraser" value="Eraser" />
+        <input type="button" id="circle" value="Circle" />
+        <input type="button" id="text" value="Text" />
+        <input type="button" id="pen" value="Pen" />
+      </div>
+    </div>
+    <script type="module" src="../8.js"></script>
+  </body>
+</html>
