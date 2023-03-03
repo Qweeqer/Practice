@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Список завдань</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* CSS стилі для calc */
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      input[type='text'] {
+        /* width: 70%; */
+        height: 50px;
+        font-size: 24px;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+      button {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+      .button-operator {
+        background-color: #f2f2f2;
+        border: 1px solid #999;
+      }
+      .button-operator:hover {
+        background-color: #e6e6e6;
+      }
+      .button-operator:active {
+        background-color: #ccc;
+      }
+      .button-clear {
+        background-color: #ff6666;
+        color: #fff;
+        border: 1px solid #ff4d4d;
+      }
+      .button-clear:hover {
+        background-color: #ff4d4d;
+      }
+      .button-clear:active {
+        background-color: #e60000;
+      }
+    </style>
+  </head>
+  <body>
+    <p><a class="button" href="../index.html">Go back</a></p>
+    <input type="text" id="display" readonly /><br /><br />
+    <button class="button-operator" onclick="clearDisplay()">C</button>
+    <button class="button-operator" onclick="calculatePercentage()">%</button>
+    <button class="button-operator" onclick="changeSign()">+/-</button>
+    <button class="button-operator" onclick="calculateSquareRoot()">√</button
+    ><br />
+    <button class="button-operator" onclick="deleteLastDigit()">←</button>
+    <button class="button-operator" onclick="saveResult()">MS</button>
+    <button class="button-operator" onclick="recallResult()">MR</button>
+    <button class="button-operator" onclick="clearResult()">MC</button>
+    <br /><br />
+    <button
+      class="button-operator"
+      value="7"
+      onclick="addToDisplay(this.value)"
+    >
+      7
+    </button>
+    <button class="button-operator" onclick="addToDisplay('8')">8</button>
+    <button class="button-operator" onclick="addToDisplay('9')">9</button>
+    <button class="button-operator" onclick="addToDisplay('/')">/</button
+    ><br /><br />
+    <button class="button-operator" onclick="addToDisplay('4')">4</button>
+    <button class="button-operator" onclick="addToDisplay('5')">5</button>
+    <button class="button-operator" onclick="addToDisplay('6')">6</button>
+    <button class="button-operator" onclick="addToDisplay('*')">*</button
+    ><br /><br />
+    <button class="button-operator" onclick="addToDisplay('1')">1</button>
+    <button class="button-operator" onclick="addToDisplay('2')">2</button>
+    <button class="button-operator" onclick="addToDisplay('3')">3</button>
+    <button class="button-operator" onclick="addToDisplay('-')">-</button
+    ><br /><br />
+    <button class="button-operator" onclick="addToDisplay('0')">0</button>
+    <button class="button-operator" onclick="addToDisplay('.')">.</button>
+    <button class="button-operator" onclick="calculate()">=</button>
+    <button class="button-operator" onclick="addToDisplay('+')">+</button>
+
+    <script src="../calculate.js"></script>
+  </body>
+</html>
