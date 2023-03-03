@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <ul id="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+    <button onclick="getListContent()">Вивести вміст</button> 
+    <script>
+        function getListContent() {
+        let listElement = document.getElementById("list");
+        let result = "";
+
+        // Проходимося по кожному елементу списку та додаємо його вміст до змінної result
+        listElement.querySelectorAll("li").forEach(function (element, index, array) {
+          if (index === 0) {
+            result += element.textContent + ", ";
+          } else if (index === array.length - 1) {
+            result += element.textContent;
+          } else {
+            result += element.textContent + ", ";
+          }
+        });
+
+        console.log(result);
+      }
+    </script>
+</body>
+</html>
