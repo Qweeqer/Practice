@@ -1,38 +1,10 @@
-// let container = document.querySelector('.container');
-// let loader = document.querySelector('.block');
-// let percent = document.querySelector(".percent");
-// let startBtn = document.querySelector('.start');
-// let stopBtn = document.querySelector('.stop');
-// let intervalId;
-// let containerWidth = container.getBoundingClientRect().width;
-// startBtn.addEventListener('click', function () {
-//   if (intervalId === undefined) {
-//     intervalId = setInterval(function () {
-//       let currentWidth = parseInt(loader.style.width || 0) + 10;
-//       if (currentWidth > 400) {
-//         currentWidth = 400;
-//       }
-//       loader.style.width = currentWidth + 'px';
-//       let currentPercent = Math.round((currentWidth / 400) * 100);
-//             percent.innerHTML = currentPercent + "%";
-//       if (currentWidth >= 400) {
-//         clearInterval(intervalId);
-//         intervalId = undefined;
-//       }
-//     }, 100);
-//   }
-// });
-
-// stopBtn.addEventListener('click', function () {
-//   clearInterval(intervalId);
-//   intervalId = undefined;
-//   if (parseInt(loader.style.width) === 400) {
-//     loader.style.width = 0;
-//     percent.innerHTML = "0%";
-//   }
-// });
-// document.querySelector('.block').style.width += 0 + 'px';
-// // реалізувати функціонал завантаження лоадера
+// Домашне завдання №3
+// 1) реалізувати функціонал завантаження лоадера
+// https://codepen.io/qweeqer/pen/ExewyeG
+// 2) реалізувати вивід даних із полів при кліку на кнопку "Надіслати" в поле outBlock
+// https://codepen.io/qweeqer/pen/OJoxXvX
+// 3) Реалізувати логіку підрахунку ціни товару по його варіаціях(при кліку на колір змінювати ціну товару).
+// https://codepen.io/qweeqer/pen/bGxoewe
 let container = document.querySelector('.container');
 let loader = document.querySelector('.block');
 let loaderWidth = (loader.style.width = '0px');
