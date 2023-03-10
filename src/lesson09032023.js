@@ -5,7 +5,26 @@
 // Метасимволи: символи, які вказують на певні класи символів, які можуть входити у текст. Наприклад, метасимвол \d позначає будь-яку цифру.
 // Квантифікатори: символи, які вказують на кількість входжень попереднього символу. Наприклад, квантифікатор + позначає одне або більше входження попереднього символу.
 // Групи: підрядки, які можуть бути використані для згрупування символів та застосування до них квантифікаторів.
-// Альтернативи: символи, які вказують на можливі варіанти символів у певному місці. Наприклад, альтернатива | позначає або один символ, або інший.
+// Альтернативи: символи, які вказують на можливі варіанти символів у певному місці.
+// Метасимволи регулярних виразів - це спеціальні символи, які дозволяють встановлювати певні
+// правила пошуку тексту в рядку.Нижче наведено найбільш поширені метасимволи та їх значення:
+
+// . - будь-який один символ, крім символу нового рядка.
+// ^ - початок рядка.
+// $ - кінець рядка.
+// * - нуль або більше входжень попереднього символу або групи символів.
+// + - одне або більше входжень попереднього символу або групи символів.
+// ? - нуль або одне входження попереднього символу або групи символів.
+// [] - символьний клас, який дозволяє знайти будь-який один символ з набору символів.
+// () - групування символів, що дозволяє застосовувати до них інші метасимволи.
+// | - або, який дозволяє шукати або один, або інший рядок.
+// \ - екранування спеціальних символів, які можуть мати інше значення в регулярних виразах.
+
+// Наприклад, регулярний вираз /^Hello World$/ буде шукати рядок, який починається з "Hello World"
+// та закінчується на "Hello World", а регулярний вираз / a.b / буде шукати будь - який рядок,
+// який містить символ "a", за яким слідує будь - який символ, а потім символ "b".
+// Наприклад, альтернатива | позначає або один символ, або інший.
+
 // Ось декілька прикладів регулярних виразів:
 
 // Пошук всіх цифр в рядку:
@@ -21,10 +40,10 @@
 
 // Методи регулярних виразів в JavaScript - це функції, які дозволяють здійснювати операції з регулярними виразами. Ось декілька методів регулярних виразів в JavaScript та їх приклади:
 
-// 1)search(pattern) - цей метод шукає перше входження регулярного виразу pattern в рядок, на якому він викликається. Приклад:
-// const string = 'The quick brown fox jumps over the lazy dog.';
+// 1)search(pattern) - цей метод шукає перше входження регулярного виразу pattern в рядок,
+// на якому він викликається.Пошук першого збігу регулярного виразу в рядку і повернення його позиції.Приклад:
+//a) const string = 'The quick brown fox jumps over the lazy dog.';
 // const pattern = /brown/;
-
 // const match = string.search(pattern);
 
 // if (match !== -1) {
@@ -32,28 +51,60 @@
 // } else {
 //   console.log('Входження не знайдено.');
 // }
+//b)
+// const str = 'The quick brown fox jumps over the lazy dog.';
+// const regex = /fox/;
+// const position = str.search(regex);
+// console.log(position); // 16
 
-// 2)match(pattern) - цей метод знаходить всі входження регулярного виразу pattern в рядок, на якому він викликається, і повертає їх у вигляді масиву. Приклад:
-// const string = 'The quick brown fox jumps over the lazy dog.';
+// 2)match(pattern) - цей метод знаходить всі входження регулярного виразу pattern в рядок, на якому він викликається,
+// і повертає їх у вигляді масиву.Пошук всіх збігів регулярного виразу в рядку і повернення масиву з цими збігами.Приклад:
+//a) const string = 'The quick brown fox jumps over the lazy dog.';
 // const pattern = /\w+/g;
-
 // const matches = string.match(pattern);
-
 // console.log(matches);
+// b)
+// const str = 'The quick brown fox jumps over the lazy dog.';
+// const regex = /the/gi;
+// const result = str.match(regex);
+// console.log(result); // ["The", "the"]
 
-// 3) replace(pattern, replacement) - цей метод замінює всі входження регулярного виразу pattern у рядку, на якому він викликається, на рядок replacement. Приклад:
-// const string = 'The quick brown fox jumps over the lazy dog.';
+
+// 3) replace(pattern, replacement) - цей метод замінює всі входження регулярного виразу pattern у рядку,
+// на якому він викликається, на рядок replacement.
+// Заміна всіх збігів регулярного виразу в рядку і повернення нового рядка зі зміненими значеннями.Приклад:
+//a) const string = 'The quick brown fox jumps over the lazy dog.';
 // const pattern = /\s+/g;
 // const replacement = '_';
 
 // const newString = string.replace(pattern, replacement);
 
 // console.log(newString);
+//b)
+// const str = 'The quick brown fox jumps over the lazy dog.';
+// const regex = /the/gi;
+// const newStr = str.replace(regex, 'a');
+// console.log(newStr); // "a quick brown fox jumps over a lazy dog."
 
-// 4) split(pattern) - цей метод розбиває рядок, на якому він викликається, на масив рядків за допомогою регулярного виразу pattern. Приклад:
-// const string = 'The quick brown fox jumps over the lazy dog.';
-// const pattern = /\s+/;
+// 4) split(pattern) - цей метод розбиває рядок, на якому він викликається, 
+// на масив рядків за допомогою регулярного виразу pattern.
+// Розбиття рядка на масив рядків за допомогою регулярного виразу.Приклад:
+//a) 
+const string = 'The quick brown fox jumps over the lazy dog.';
+const pattern = /\s+/;
+const words = string.split(pattern);
+console.log(words);// ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog."]
 
-// const words = string.split(pattern);
+// 5)test(): Перевірка чи відповідає рядок заданому регулярному виразу.
+// const str = 'The quick brown fox jumps over the lazy dog.';
+// const regex = /fox/;
+// console.log(regex.test(str)); // true
+// 6)exec(): Пошук першого збігу регулярного виразу в рядку і повернення інформації про цей збіг.
+// const str = 'The quick brown fox jumps over the lazy dog.';
+// const regex = /fox/;
+// const result = regex.exec(str);
+// console.log(result[0]); // "fox"
+// console.log(result.index); // 16
 
-// console.log(words);
+// Регулярний вираз для пошуку пошти в рядку:
+// let 
