@@ -82,6 +82,11 @@ let currentFontSize = 16;
 addPostBtn.addEventListener('click', () => {
   // Отримуємо введений текст з поле введення
   const text = inputText.value;
+  // Перевірка, що текст не пустий
+  if (text.length < 1) {
+    alert('Введіть текст поста');
+    return;
+  }
   // Створюємо новий елемент div з текстом
   const post = document.createElement('div');
   post.innerText = text;
