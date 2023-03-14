@@ -223,12 +223,29 @@ function checkEmail(email) {
 // то бекграунд закрашувати зеленим кольором
 // а в  іншому випадку червоним(закрашування бекграунду відбувається при введені даних)
 const input = document.getElementById('input');
+let alertShown = false;
+
 input.addEventListener('input', function () {
   const value = input.value;
   const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_#!])[0-9a-zA-Z_#!]{8,}$/;
+
   if (regex.test(value)) {
     input.style.backgroundColor = 'green';
+    alertShown = false;
   } else {
     input.style.backgroundColor = 'red';
+    if (!alertShown) {
+      alert(
+        'Значення має бути більше або рівне 8 символів, містить числа, літери у верхньому  і нижньому регістрі та  хоч 1 символ( _ або # або !)'
+      );
+      alertShown = true;
+    }
   }
 });
+// Тепер алерт буде виведено тільки раз, коли користувач ввів некоректне значення, і змінна alertShown встановлена на true. Після того, як користувач введе коректне значення, alertShown буде змінена на false, щоб знову показати алерт при наступному некоректному значенні.
+
+
+
+
+
+
