@@ -124,3 +124,111 @@ decreaseFontBtn.addEventListener('click', () => {
     fontSize.innerText = `${currentFontSize}px`;
   }
 });
+// Реалізуйте програму, яка відслідковуватиме зміну розміру(ширини і висоти)
+// вікна браузера і виводитиме на поточну сторінку при її розтязі / стисканні відповідні значення.
+let windowSize = document.getElementById('windowSize');
+
+function updateWindowSize() {
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  console.log('Розмір вікна: ' + width + ' x ' + height);
+  windowSize.textContent = width + ' x ' + height;
+  // На основі попередньої задачі відкрити в новому вікні гугл при ширині екрану менше 1000px
+  if (width < 1000) {
+    let googleWindow = window.open('https://www.google.com', '_blank');
+    if (googleWindow) {
+      googleWindow.focus();
+    }
+  }
+  /////////////////////
+}
+
+window.addEventListener('resize', updateWindowSize);
+// Створити сторінку із  2 кнопками(goToGoogle та goToBing), перша при кліку відкриває гугл в поточній вкладці
+//  за допомогою assign а при кліку на goToBing ми відкриваємо bing  за допомогою методу replace об'єкту location
+let goToGoogle = document.getElementById('goToGoogle');
+goToGoogle.addEventListener('click', function () {
+  window.location.assign('https://www.google.com');
+});
+
+let goToBing = document.getElementById('goToBing');
+goToBing.addEventListener('click', function () {
+  window.location.replace('https://www.bing.com');
+});
+let reload = document.getElementById('reload');
+reload.addEventListener('click', function () {
+  // перезавантаження
+  // console.log('reload', reload);
+  location.reload();
+});
+let forwardOnePage = document.getElementById('forwardOnePage');
+forwardOnePage.addEventListener('click', function () {
+  window.history.forward();
+});
+let backOnePage = document.getElementById('backOnePage');
+backOnePage.addEventListener('click', function () {
+  window.history.go(-2);
+  console.log('window.history.length', window.history.length);
+});
+////////////---------------/////
+updateWindowSize();
+
+function validateCardNumber() {
+  let input1 = document.getElementById('cardNumber1');
+  // let input2 = document.getElementById('cardNumber2');
+  // let input3 = document.getElementById('cardNumber3');
+  // let input4 = document.getElementById('cardNumber4');
+  // let cardNumber = input1.value + input2.value + input3.value + input4.value;
+  let cardNumber = input1.value;
+  let regex = /^(?:\d{4}[-\s]?){4}$/;
+  if (!regex.test(cardNumber)) {
+    document.getElementById('validationResult').textContent =
+      'Номер карти невалідний.' + cardNumber;
+    document.getElementById('validationResult').classList.add('invalid');
+    document.getElementById('validationResult').classList.remove('valid');
+  } else {
+    document.getElementById('validationResult').textContent =
+      'Номер карти валідний: ' + cardNumber;
+    document.getElementById('validationResult').classList.add('valid');
+    document.getElementById('validationResult').classList.remove('invalid');
+  }
+}
+
+let validateButton = document.getElementById('validateButton');
+validateButton.addEventListener('click', validateCardNumber);
+// Напишіть функцію, яка приймає рядкові дані і виконує перевірку на їх відповідність емейлу.
+//         Вимоги:
+// •  Цифри (0-9).
+// •  Тільки латинські літери в великому (A-Z) і малому (a-z) регістрах.
+// •  В тілі емейла допустимі лишеі символи “_” і “-”. Але вони не можуть бути 1-им символом емейлу.
+//  •  Символ “-” не може повторюватися.
+
+// checkEmail('my_mail@gmail.com');
+// Email is correct!
+// checkEmail('#my_mail@gmail.com');
+// Email is not correct!
+// checkEmail('my_ma--il@gmail.com');
+// Email is not correct!
+function checkEmail(email) {
+  const regex =
+    /^[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\.[A-Za-z]{2,}$/;
+  if (regex.test(email)) {
+    document.getElementById('result').textContent = 'Email is correct!';
+  } else {
+    document.getElementById('result').textContent = 'Email is not correct!';
+  }
+}
+// Реалізувати валідацію значень поля, якщо значення більше - рівне 8 символів, містить числа,
+//   літери у верхньому  і нижньому регістрі та  хоч 1 символ(_#!)
+// то бекграунд закрашувати зеленим кольором
+// а в  іншому випадку червоним(закрашування бекграунду відбувається при введені даних)
+const input = document.getElementById('input');
+input.addEventListener('input', function () {
+  const value = input.value;
+  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_#!])[0-9a-zA-Z_#!]{8,}$/;
+  if (regex.test(value)) {
+    input.style.backgroundColor = 'green';
+  } else {
+    input.style.backgroundColor = 'red';
+  }
+});
