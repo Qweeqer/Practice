@@ -173,29 +173,29 @@ backOnePage.addEventListener('click', function () {
 ////////////---------------/////
 updateWindowSize();
 
-// function validateCardNumber() {
-//   let input1 = document.getElementById('cardNumber1');
+function validateCardNumber() {
+  let input1 = document.getElementById('cardNumber1');
   // let input2 = document.getElementById('cardNumber2');
   // let input3 = document.getElementById('cardNumber3');
   // let input4 = document.getElementById('cardNumber4');
   // let cardNumber = input1.value + input2.value + input3.value + input4.value;
-//   let cardNumber = input1.value;
-//   let regex = /^(?:\d{4}[-\s]?){4}$/;
-//   if (!regex.test(cardNumber)) {
-//     document.getElementById('validationResult').textContent =
-//       'Номер карти невалідний.' + cardNumber;
-//     document.getElementById('validationResult').classList.add('invalid');
-//     document.getElementById('validationResult').classList.remove('valid');
-//   } else {
-//     document.getElementById('validationResult').textContent =
-//       'Номер карти валідний: ' + cardNumber;
-//     document.getElementById('validationResult').classList.add('valid');
-//     document.getElementById('validationResult').classList.remove('invalid');
-//   }
-// }
+  let cardNumber = input1.value;
+  let regex = /^(?:\d{4}[-\s]?){4}$/;
+  if (!regex.test(cardNumber)) {
+    document.getElementById('validationResult').textContent =
+      'Номер карти невалідний.' + cardNumber;
+    document.getElementById('validationResult').classList.add('invalid');
+    document.getElementById('validationResult').classList.remove('valid');
+  } else {
+    document.getElementById('validationResult').textContent =
+      'Номер карти валідний: ' + cardNumber;
+    document.getElementById('validationResult').classList.add('valid');
+    document.getElementById('validationResult').classList.remove('invalid');
+  }
+}
 
-// let validateButton = document.getElementById('validateButton');
-// validateButton.addEventListener('click', validateCardNumber);
+let validateButton = document.getElementById('validateButton');
+validateButton.addEventListener('click', validateCardNumber);
 // Напишіть функцію, яка приймає рядкові дані і виконує перевірку на їх відповідність емейлу.
 //         Вимоги:
 // •  Цифри (0-9).
@@ -223,12 +223,12 @@ function checkEmail(email) {
 // то бекграунд закрашувати зеленим кольором
 // а в  іншому випадку червоним(закрашування бекграунду відбувається при введені даних)
 // const input = document.getElementById('input');
-// input.addEventListener('input', function () {
-//   const value = input.value;
-//   const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_#!])[0-9a-zA-Z_#!]{8,}$/;
-//   if (regex.test(value)) {
-//     input.style.backgroundColor = 'green';
-//   } else {
-//     input.style.backgroundColor = 'red';
-//   }
-// });
+input.addEventListener('input', function () {
+  const value = input.value;
+  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_#!])[0-9a-zA-Z_#!]{8,}$/;
+  if (regex.test(value)) {
+    input.style.backgroundColor = 'green';
+  } else {
+    input.style.backgroundColor = 'red';
+  }
+});
