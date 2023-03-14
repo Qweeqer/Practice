@@ -425,6 +425,72 @@ ul.acrd-item-submenu{
     .fontSize {
       color: aliceblue;
     }
+    p,
+    h3,
+    #result,
+    .text {
+      text-align: center;
+      color: aliceblue;
+      font-size: 24px;
+      line-height: 1.4;
+    }
+    .buttonLink {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 0 auto;
+    }
+    .bankCard {
+      display: flex;
+      flex-direction: column;
+      max-width: 70%;
+    }
+    #cardNumber1,
+    #cardNumber2,
+    #cardNumber3,
+    #cardNumber4,
+    #email,
+    #input {
+      display: inline-block;
+      width: 30rem;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+      border: 2px solid black;
+      border-radius: 0.25rem;
+      box-sizing: border-box;
+      margin-right: 0.5rem;
+    }
+
+    #validationResult {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      
+    }
+
+    #validationResult.invalid {
+      color: red;
+      background-color: whitesmoke;
+      border: 2px solid black;
+      padding: 5px;
+    }
+
+    #validationResult.valid {
+      color: green;
+      background-color: whitesmoke;
+      border: 2px solid black;
+      padding: 5px;
+    }
+    #validateButton,
+    .mainText,
+    .bankCard,
+    .checkEmail,
+    .validationField {
+      display: flex;
+      margin: 0 auto;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+    }
   </style>
   <body>
     <!-- <button id="button1">Button 1</button>
@@ -508,6 +574,47 @@ ul.acrd-item-submenu{
         <input type="color" id="text-color" value="#000000" />
       </div>
     </div>
-    <script src="../practice10032023.js"></script>
+    <p>Розмір вікна: <span id="windowSize"></span></p>
+    <div class="buttonLink">
+      <button id="goToBing">Перейти до Bing</button>
+      <button id="goToGoogle">Перейти до Google</button>
+      <button id="reload">Reload</button>
+      <button id="backOnePage">Back one page</button>
+      <button id="forwardOnePage">Forward one page</button>
+    </div>
+    <div class="bankCard">
+      <h3>Перевірка номера банківської карти</h3>
+      <p class="mainText">
+        Введіть номер своєї банківської карти:
+        <input type="text" id="cardNumber1" maxlength="16" size="16" />
+        <!-- <input type="text" id="cardNumber1" maxlength="4" size="4" />
+      -
+      <input type="text" id="cardNumber2" maxlength="4" size="4" />
+      -
+      <input type="text" id="cardNumber3" maxlength="4" size="4" />
+      -
+      <input type="text" id="cardNumber4" maxlength="4" size="4" /> -->
+        <button id="validateButton">Перевірити</button>
+      </p>
+      <p id="validationResult"></p>
+    </div>
+    <div class="checkEmail">
+      <h3>Check Email</h3>
+      <label class="text" for="email">Enter email address:</label>
+      <input type="text" id="email" />
+      <button
+        class="text"
+        onclick="checkEmail(document.getElementById('email').value)"
+      >
+        Check Email
+      </button>
+      <div id="result"></div>
+    </div>
+    <div class="validationField">
+      <h3>Input validation</h3>
+      <label class="text" for="input">Введіть значення:</label>
+      <input type="text" id="input" name="input" />
+    </div>
+    <script src="../../src/practice10032023.js"></script>
   </body>
 </html>
