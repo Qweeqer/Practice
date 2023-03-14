@@ -7,12 +7,14 @@
     <!-- <link rel="stylesheet" href="../src/sass/index.scss" /> -->
     <style>
       #menu {
-        list-style: none;
         margin: 0;
         padding: 0;
+        gap: 20px;
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
+        list-style: none;
         background-color: #f8f8f8;
       }
 
@@ -48,7 +50,7 @@
   <!-- <script type="module" src="./6.js"></script> -->
   <body>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <!-- <include src="./partials/example.html"></include> -->
+    <include src="./partials/example.html"></include>
     <ul id="menu" class="menu">
       <li><a class="button" href="../src/partials/5.html">Page 5</a></li>
       <li><a class="button" href="../src/partials/6.html">Page 6</a></li>
