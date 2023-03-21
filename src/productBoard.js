@@ -5,60 +5,123 @@
 // 4) Зробити опитування користувача, кожна відповідь затерає наявне DOM дерево і відрисовує нове (із наступним питанням), всі відповіді зберігати в масиві, і в кінці на основі цих відповідей вивести інформацію про користувача на основі відповідей.
 // 5) Реалізувати логіку підрахунку ціни товару по його варіаціях(при кліку на колір змінювати ціну товару).
 // https://codepen.io/qweeqer/pen/bGxoewe
-const shoesImgNodes = document.querySelectorAll('.shoe');
-const shoeBckgrnddNodes = document.querySelectorAll('.gradient');
-const btnsColorNodes = document.querySelectorAll('.color');
-const sizeSelectNode = document.querySelector('#size-select');
-const outPriceNode = document.querySelector('#outprice');
+// const shoesImgNodes = document.querySelectorAll('.shoe');
+// const shoeBckgrnddNodes = document.querySelectorAll('.gradient');
+// const btnsColorNodes = document.querySelectorAll('.color');
+// const sizeSelectNode = document.querySelector('#size-select');
+// const outPriceNode = document.querySelector('#outprice');
 
-const priceObj = {
-  blue: 189.99,
-  red: 209.99,
-  green: 179.99,
-  orange: 169.99,
-  black: 309.99,
-};
+// const priceObj = {
+//   blue: 189.99,
+//   red: 209.99,
+//   green: 179.99,
+//   orange: 169.99,
+//   black: 309.99,
+// };
 
-let shoesImgArr = Array.from(shoesImgNodes);
-let shoeBckgrndArr = Array.from(shoeBckgrnddNodes);
-let btnsColorArr = Array.from(btnsColorNodes);
+// let shoesImgArr = Array.from(shoesImgNodes);
+// let shoeBckgrndArr = Array.from(shoeBckgrnddNodes);
+// let btnsColorArr = Array.from(btnsColorNodes);
 
-let activeColor = 'blue';
-let activeSize = '38';
+// let activeColor = 'blue';
+// let activeSize = '38';
 
-function updatePrice() {
-  const price =
-    priceObj[activeColor] +
-    Number(
-      sizeSelectNode.options[sizeSelectNode.selectedIndex].getAttribute(
-        'data-price'
-      )
-    );
-  outPriceNode.textContent = price.toFixed(2);
-}
+// function updatePrice() {
+//   const price =
+//     priceObj[activeColor] +
+//     Number(
+//       sizeSelectNode.options[sizeSelectNode.selectedIndex].getAttribute(
+//         'data-price'
+//       )
+//     );
+//   outPriceNode.textContent = price.toFixed(2);
+// }
 
-btnsColorArr.forEach(node => {
-  node.addEventListener('click', () => {
-    btnsColorArr.forEach(node => node.classList.remove('active'));
-    node.classList.add('active');
-    const color = node.getAttribute('color');
-    activeColor = color;
-    shoesImgArr.forEach(node => node.classList.remove('show'));
-    shoesImgArr
-      .find(node => node.getAttribute('color') === color)
-      .classList.add('show');
-    shoeBckgrndArr.forEach(node => node.classList.remove('second'));
-    shoeBckgrndArr
-      .find(node => node.getAttribute('color') === color)
-      .classList.add('second');
+// btnsColorArr.forEach(node => {
+//   node.addEventListener('click', () => {
+//     btnsColorArr.forEach(node => node.classList.remove('active'));
+//     node.classList.add('active');
+//     const color = node.getAttribute('color');
+//     activeColor = color;
+//     shoesImgArr.forEach(node => node.classList.remove('show'));
+//     shoesImgArr
+//       .find(node => node.getAttribute('color') === color)
+//       .classList.add('show');
+//     shoeBckgrndArr.forEach(node => node.classList.remove('second'));
+//     shoeBckgrndArr
+//       .find(node => node.getAttribute('color') === color)
+//       .classList.add('second');
+//     updatePrice();
+//   });
+// });
+
+// sizeSelectNode.addEventListener('change', () => {
+//   activeSize = sizeSelectNode.value;
+//   updatePrice();
+// });
+
+// updatePrice();
+
+// JQuery
+// Реалізувати логіку підрахунку ціни товару по його варіаціях(шаблон наведений тут, при кліку на колір змінювати ціну товару).
+// Придумати ще 2 варіації, відяких буде залежати ціна товару.
+$(document).ready(function () {
+  var shoesImgNodes = $('.shoe');
+  var shoeBckgrnddNodes = $('.gradient');
+  var btnsColorNodes = $('.color');
+  var sizeSelectNode = $('#size-select');
+  var outPriceNode = $('#outprice');
+
+  var priceObj = {
+    blue: 189.99,
+    red: 209.99,
+    green: 179.99,
+    orange: 169.99,
+    black: 309.99,
+  };
+
+  var activeColor = 'blue';
+  var activeSize = '38';
+
+  function updatePrice() {
+    var price =
+      priceObj[activeColor] +
+      Number(sizeSelectNode.find(':selected').attr('data-price'));
+    outPriceNode.text(price.toFixed(2));
+  }
+
+  btnsColorNodes.each(function (node) {
+    btnsColorNodes.click(function () {
+      btnsColorNodes.each(function (node) {
+        btnsColorNodes.removeClass('active');
+      });
+      btnsColorNodes.addClass('active');
+      var color = node.attr('color');
+      activeColor = color;
+      shoesImgNodes.each(function (node) {
+        node.removeClass('show');
+      });
+      shoesImgNodes
+        .find(function (node) {
+          return node.attr('color') === color;
+        })
+        .addClass('show');
+      shoeBckgrnddNodes.each(function (node) {
+        node.removeClass('second');
+      });
+      shoeBckgrnddNodes
+        .find(function (node) {
+          return node.attr('color') === color;
+        })
+        .addClass('second');
+      updatePrice();
+    });
+  });
+
+  sizeSelectNode.on('change', function () {
+    activeSize = sizeSelectNode.val();
     updatePrice();
   });
-});
 
-sizeSelectNode.addEventListener('change', () => {
-  activeSize = sizeSelectNode.value;
   updatePrice();
 });
-
-updatePrice();
-
