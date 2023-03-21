@@ -72,48 +72,26 @@ $(document).ready(function () {
   var sizeSelectNode = $('#size-select');
   var outPriceNode = $('#outprice');
 
-  var priceObj = {
-    blue: 189.99,
-    red: 209.99,
-    green: 179.99,
-    orange: 169.99,
-    black: 309.99,
-  };
-
   var activeColor = 'blue';
   var activeSize = '38';
 
   function updatePrice() {
-    var price =
-      priceObj[activeColor] +
-      Number(sizeSelectNode.find(':selected').attr('data-price'));
+    var activeColorPrice = $('.color.active').attr('data-price');
+    var activeSizePrice = $('#size-select option:selected').attr('data-price');
+    var price = parseFloat(activeColorPrice) + parseFloat(activeSizePrice);
     outPriceNode.text(price.toFixed(2));
   }
 
-  btnsColorNodes.each(function (node) {
-    btnsColorNodes.click(function () {
-      btnsColorNodes.each(function (node) {
-        btnsColorNodes.removeClass('active');
-      });
-      btnsColorNodes.addClass('active');
-      var color = node.attr('color');
+  btnsColorNodes.each(function (index, node) {
+    $(node).click(function () {
+      btnsColorNodes.removeClass('active');
+      $(node).addClass('active');
+      var color = $(node).attr('color');
       activeColor = color;
-      shoesImgNodes.each(function (node) {
-        node.removeClass('show');
-      });
-      shoesImgNodes
-        .find(function (node) {
-          return node.attr('color') === color;
-        })
-        .addClass('show');
-      shoeBckgrnddNodes.each(function (node) {
-        node.removeClass('second');
-      });
-      shoeBckgrnddNodes
-        .find(function (node) {
-          return node.attr('color') === color;
-        })
-        .addClass('second');
+      shoesImgNodes.removeClass('show');
+      shoesImgNodes.filter('[color="' + color + '"]').addClass('show');
+      shoeBckgrnddNodes.removeClass('second');
+      shoeBckgrnddNodes.filter('[color="' + color + '"]').addClass('second');
       updatePrice();
     });
   });
