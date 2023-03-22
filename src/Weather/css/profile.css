@@ -1,0 +1,45 @@
+nav.buttons > button {
+  display: flex;
+  justify-content: space-around;
+}
+#selected-button {
+  display: flex;
+  justify-content: space-between;
+}
+/* #home-button{
+    position: absolute;
+} */
+.icon-heart {
+  fill: yellow;
+  width: 32px;
+  height: 32px;
+}
+.inputSearch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addToSelected {
+  position: absolute;
+  background-color: unset;
+  border: unset;
+  box-shadow: none;
+}
+.addToSelected:hover {
+  background-color: unset;
+  border: unset;
+  box-shadow: none;
+}
+.addToSelected > .icon-heart {
+  position: relative;
+  top: -2px;
+  left: 75px;
+  width: 18px;
+  height: 18px;
+  fill: #1d1d04;
+  transition: all 0.3s ease-in-out;
+}
+.addToSelected > .icon-heart:hover {
+  fill: rgb(255, 255, 3);
+  transform: scale(1.5);
+}
