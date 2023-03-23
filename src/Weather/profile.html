@@ -26,13 +26,13 @@
         <div id="dark"></div>
 <div id="Home" style="display: none;">
     <div class="form-class">
-      <button id="button-x3"><div id="x-icon"></div></button>
+      <button id="button-x1"><div id="x-icon"></div></button>
       <h2>Home</h2>
     </div>
   </div>
 <div id="Selected" style="display: none;">
     <div class="form-class">
-      <button id="button-x4"><div id="x-icon"></div></button>
+      <button id="button-x2"><div id="x-icon"></div></button>
       <h2>Selected</h2>
     </div>
   </div>
@@ -42,7 +42,15 @@
       <h2>Profile</h2>
     </div>
   </div>
-
+<div id="profile-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-profile-modal" class="close">&times;</span>
+    <h2>Інформація про користувача</h2>
+    <div id="user-info">
+      <!-- Інформація про користувача буде додана тут -->
+    </div>
+  </div>
+</div>
   <div id="Logout" style="display: none;">
     <div class="form-class">
       <button id="button-x2"><div id="x-icon"></div></button>
@@ -105,7 +113,8 @@
         <svg class="icon-heart">
   <use xlink:href="#icon-heart"></use>
 </svg>
-    </button></div>
+    </button>
+</div>
     <label>
       Темна тема:
       <input type="checkbox" id="theme-switch" />
@@ -125,8 +134,8 @@
   <div id="UserInfo" style="display: none;"></div>
 
 
-
-    <script src="./weather.js"></script>
+<script type="module" src="./checkAuthorization.js"></script>
+    <script type="module" src="./weather.js"></script>
     <script type="module" src="./auth.js"></script>
 <script type="module" src="./profile.js"></script>
 
