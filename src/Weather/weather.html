@@ -38,9 +38,10 @@
         Repeat Password<br>
         <input type="password" id="confirm-password-input" name="confirmPassword"><br>
         I agree to the Terms and Conditions
-        <input type="checkbox"><br>
-        <input type="submit" value="Register">
-      </form>
+        <input type="checkbox" id="agreeCheckbox"><br>
+        <input type="submit" value="Register" id="submitButton">
+    <p class="error-message"></p>  
+    </form>
     </div>
   </div>
 
@@ -53,7 +54,7 @@
         <input type="text" id="email" name="email"><br>
         Password<br>
         <input type="password" id="password" name="password"><br>
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" id="loginButton">
       </form>
     </div>
   </div>
@@ -141,7 +142,7 @@
   <div id="map" style="width: 100%; height: 400px;"></div> -->
 
 
-    <script src="./weather.js"></script>
+    <script type='module' src="./weather.js"></script>
     <script type='module' src="./auth.js"></script>
     <!-- <script type='module' src="./authAPI.js"></script> -->
 
