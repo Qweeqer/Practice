@@ -1,9 +1,20 @@
 const BASE_URL = 'https://connections-api.herokuapp.com';
 let token = '';
 
+// export const setToken = newToken => {
+//   token = newToken;
+// };
+
 export const setToken = newToken => {
   token = newToken;
+  localStorage.setItem('authToken', newToken);
 };
+
+// Відновлюємо токен з localStorage
+const storedToken = localStorage.getItem('authToken');
+if (storedToken) {
+  token = storedToken;
+}
 
 export const getHeaders = () => {
   return {
@@ -62,6 +73,7 @@ export const getLogOut = async () => {
 
 export const getCurrent = async () => {
   if (!token) {
+    // console.log('Token is not set');
     return null;
   }
 
@@ -72,6 +84,7 @@ export const getCurrent = async () => {
 
   try {
     const response = await fetch(`${BASE_URL}/users/current`, options);
+    // console.log('Response status:', response.status);
 
     if (response.status === 401) {
       setToken('');
@@ -79,9 +92,11 @@ export const getCurrent = async () => {
     }
 
     const data = await response.json();
+    // console.log('User data:', data);
     return data;
   } catch (error) {
     setToken('');
+    console.error('Error in getCurrent:', error);
     throw error;
   }
 };
@@ -104,7 +119,12 @@ const showUserInfo = async () => {
   const welcomeMessage = document.createElement('p');
   welcomeMessage.textContent = `Welcome, ${username}!`;
   const loginForm = document.getElementById('Login');
-  loginForm.style.display = 'none';
+
+  // Перевірка наявності елемента loginForm перед зміною його стилю
+  if (loginForm) {
+    loginForm.style.display = 'none';
+  }
+
   const userInfo = document.getElementById('UserInfo');
 
   if (userInfo) {
@@ -137,7 +157,7 @@ const init = async () => {
     hideUserInfo();
   }
 };
-
+// *******************registerForm*************************************
 const registerForm = document.getElementById('register-form');
 if (registerForm) {
   registerForm.addEventListener('submit', async event => {
@@ -145,7 +165,20 @@ if (registerForm) {
 
     const { firstName, email, password, confirmPassword } =
       event.target.elements;
+    // Валідація
 
+    if (!validateForm()) {
+      errorMessage.textContent =
+        'Please fill in all fields and agree to the Terms of Use.';
+      return;
+    } else {
+      errorMessage.textContent = '';
+      alert('Thank you! Your account has been successfully created!');
+      //   registerForm.reset();
+      updateSubmitButtonState();
+    }
+    updateSubmitButtonState();
+    /////
     try {
       await getSignUp({
         name: firstName.value,
@@ -181,6 +214,8 @@ if (registerForm) {
     }
   });
 }
+// *******************END********************************************
+// ******************LOGIN FORM******************************************
 const loginForm = document.getElementById('login-form');
 
 if (loginForm) {
@@ -194,6 +229,7 @@ if (loginForm) {
         email: email.value,
         password: password.value,
       });
+      // Токен вже збережений у localStorage усередині функції setToken
       login.style.display = 'none';
       dark.style.display = 'none';
       showUserInfo();
@@ -205,73 +241,74 @@ if (loginForm) {
   });
 }
 
-const handleTodayButtonClick = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/today`, {
-      headers: getHeaders(),
-    });
-    const data = await response.json();
-    displayWeatherData(data);
-  } catch (error) {
-    console.error(error);
-    alert('Weather get Error');
-  }
-};
+// *******************END********************************************
+// const handleTodayButtonClick = async () => {
+//   try {
+//     const response = await fetch(`${BASE_URL}/today`, {
+//       headers: getHeaders(),
+//     });
+//     const data = await response.json();
+//     displayWeatherData(data);
+//   } catch (error) {
+//     console.error(error);
+//     alert('Weather get Error');
+//   }
+// };
 
-const handleThreeDayButtonClick = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/three`, {
-      headers: getHeaders(),
-    });
-    const data = await response.json();
-    displayWeatherData(data);
-  } catch (error) {
-    console.error(error);
-    alert('Weather get Error');
-  }
-};
+// const handleThreeDayButtonClick = async () => {
+//   try {
+//     const response = await fetch(`${BASE_URL}/three`, {
+//       headers: getHeaders(),
+//     });
+//     const data = await response.json();
+//     displayWeatherData(data);
+//   } catch (error) {
+//     console.error(error);
+//     alert('Weather get Error');
+//   }
+// };
 
-const handleSevenDayButtonClick = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/seven`, {
-      headers: getHeaders(),
-    });
-    const data = await response.json();
-    displayWeatherData(data);
-  } catch (error) {
-    console.error(error);
-    alert('Weather get Error');
-  }
-};
+// const handleSevenDayButtonClick = async () => {
+//   try {
+//     const response = await fetch(`${BASE_URL}/seven`, {
+//       headers: getHeaders(),
+//     });
+//     const data = await response.json();
+//     displayWeatherData(data);
+//   } catch (error) {
+//     console.error(error);
+//     alert('Weather get Error');
+//   }
+// };
 
-const displayWeatherData = data => {
-  const weatherContainer = document.getElementById('weather-container');
-  weatherContainer.innerHTML = '';
+// const displayWeatherData = data => {
+//   const weatherContainer = document.getElementById('weather-container');
+//   weatherContainer.innerHTML = '';
 
-  data.forEach(day => {
-    const { date, description, temperature, humidity } = day;
-    const dayContainer = document.createElement('div');
-    dayContainer.classList.add('weather-day');
+//   data.forEach(day => {
+//     const { date, description, temperature, humidity } = day;
+//     const dayContainer = document.createElement('div');
+//     dayContainer.classList.add('weather-day');
 
-    const dateElement = document.createElement('p');
-    dateElement.textContent = date;
-    dayContainer.appendChild(dateElement);
+//     const dateElement = document.createElement('p');
+//     dateElement.textContent = date;
+//     dayContainer.appendChild(dateElement);
 
-    const descriptionElement = document.createElement('p');
-    descriptionElement.textContent = description;
-    dayContainer.appendChild(descriptionElement);
+//     const descriptionElement = document.createElement('p');
+//     descriptionElement.textContent = description;
+//     dayContainer.appendChild(descriptionElement);
 
-    const temperatureElement = document.createElement('p');
-    temperatureElement.textContent = `Температура: ${temperature} °C`;
-    dayContainer.appendChild(temperatureElement);
+//     const temperatureElement = document.createElement('p');
+//     temperatureElement.textContent = `Температура: ${temperature} °C`;
+//     dayContainer.appendChild(temperatureElement);
 
-    const humidityElement = document.createElement('p');
-    humidityElement.textContent = `Вологість: ${humidity} %`;
-    dayContainer.appendChild(humidityElement);
+//     const humidityElement = document.createElement('p');
+//     humidityElement.textContent = `Вологість: ${humidity} %`;
+//     dayContainer.appendChild(humidityElement);
 
-    weatherContainer.appendChild(dayContainer);
-  });
-};
+//     weatherContainer.appendChild(dayContainer);
+//   });
+// };
 
 // ініціалізація додатка
 document.addEventListener('DOMContentLoaded', () => {
@@ -312,6 +349,84 @@ if (buttonX2) {
     dark.style.display = 'none';
   });
 }
+// *******************Валідація**********************
+const errorMessage = document.querySelector('.error-message');
+const submitButton = document.getElementById('submitButton');
+const firstName = document.getElementById('first-name-input');
+const email = document.getElementById('email-input');
+const password = document.getElementById('password-input');
+const confirmPassword = document.getElementById('confirm-password-input');
+const agreeCheckbox = document.getElementById('agreeCheckbox');
+function validateForm() {
+  let isValid = true;
+  // Перевірка усіх полів вводу та чекбокса
+  if (
+    firstName.value === '' ||
+    email.value === '' ||
+    password.value === '' ||
+    confirmPassword.value === '' ||
+    !agreeCheckbox.checked
+  ) {
+    isValid = false;
+  }
+  //Перевірка імені
+  const nameRegex =
+    /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+  if (!nameRegex.test(firstName.value)) {
+    errorMessage.textContent =
+      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan";
+    isValid = false;
+  }
+  // Перевірка корректності email
+  const emailRegex =
+    /^[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\.[A-Za-z]{2,}$/;
+  if (!emailRegex.test(email.value)) {
+    errorMessage.textContent =
+      'Please enter valid email address, for example  example @gmail.com';
+    isValid = false;
+  }
+
+  // Перевірка пароля
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_#!])[0-9a-zA-Z_#!]{8,}$/;
+  if (!passwordRegex.test(password.value)) {
+    errorMessage.textContent =
+      'Please enter your password. Minimum length 8 symbols. Symbols _#! Min 1 Big and 1 small letter ';
+    isValid = false;
+  }
+  // Перевірка співпадіння паролей
+  if (password.value !== confirmPassword.value) {
+    errorMessage.textContent =
+      'Passwords do not match. Please check the entered data.';
+    isValid = false;
+  }
+  submitButton.disabled = !isValid;
+  return isValid;
+}
+if (agreeCheckbox) {
+  agreeCheckbox.addEventListener('change', () => {
+    errorMessage.textContent = '';
+    updateSubmitButtonState();
+  });
+}
+// ***************Оновлення статусу полів та відповідно кнопки сабміту*******************************
+function updateSubmitButtonState() {
+  submitButton.disabled = !validateForm();
+}
+if (registerForm) {
+  // Перевірка поля після першої невдалої валідації
+  const inputFields = [firstName, email, password, confirmPassword];
+  inputFields.forEach(input => {
+    input.addEventListener('input', () => {
+      input.style.backgroundColor = '';
+      errorMessage.textContent = '';
+      updateSubmitButtonState();
+    });
+  });
+}
+
+// **********************************************
+
 // *********************NOTE***********************
 // const updateUserInfo = async () => {
 //   try {
