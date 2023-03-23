@@ -155,10 +155,21 @@ img {
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 /* для кнопки Логін */
-button:hover {
+button:hover,
+#submitButton:hover,
+#submitButton:focus,
+#loginButton:hover,
+#loginButton:focus {
+  color: white;
   background-color: #4caf50;
   box-shadow: rgb(33 33 33) 2px -4px 5px -1px;
 }
+.form-class input[type='submit']:disabled {
+  background-color: rgba(239, 239, 239, 0.3) !important;
+  color: rgba(16, 16, 16, 0.3) !important;
+  border-color: rgba(118, 118, 118, 0.3) !important;
+}
+
 /* стили для разметки, возвращаемой функцией Weather */
 .weather-wrapper {
   display: flex;
@@ -167,6 +178,19 @@ button:hover {
   /* margin-top: 32px; */
   padding: 0px;
 }
+
+.weather-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.WeatherWrapper {
+  flex: 0 0 calc(33.3333% - 20px);
+  margin: 10px;
+  box-sizing: border-box;
+}
+
 .weather-name {
   font-size: 2rem;
 }
@@ -184,11 +208,11 @@ body.dark-theme button {
   color: #f0f0f0;
   border: 1px solid #f0f0f0;
 }
-body.dark-theme button.addToSelected{
+body.dark-theme button.addToSelected {
   background-color: unset;
-    margin: 0px;
-    padding: 0px;
-    border: unset;
+  margin: 0px;
+  padding: 0px;
+  border: unset;
 }
 body.dark-theme li {
   background-color: #1c1c1c;
@@ -239,6 +263,9 @@ body.dark-theme li {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
+  background-image: url('https://source.unsplash.com/1600x900/?nature,landscape');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 /* Close Button */
