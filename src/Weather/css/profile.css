@@ -20,7 +20,7 @@ nav.buttons > button {
 .addToSelected {
   position: relative;
   right: 45px;
-    bottom: 4px;
+  bottom: 4px;
   background-color: unset;
   border: unset;
   box-shadow: none;
@@ -111,18 +111,20 @@ body.modal-open .addToSelected {
 
 .modal-content {
   background-color: #fefefe;
-  /* margin: 15% auto;
-  padding: 20px; */
   border: 1px solid #888;
   width: 100%;
-  height: 100%;
+  
   background-image: url(https://source.unsplash.com/1600x900/?nature,landscape);
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
-    font-size: 36px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  font-size: 36px;
+  box-sizing: border-box;
 }
-#user-info{
+
+#user-info {
   border: 5px inset white;
 }
 .close {
@@ -137,4 +139,72 @@ body.modal-open .addToSelected {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+/* ****************Погодинний прогноз************** */
+/* .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+} */
+
+.closeWeatherModal {
+  color: #838383;
+    float: right;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.closeWeatherModal:hover,
+.closeWeatherModal:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hourly-forecast {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.hourly-forecast-item {
+  display: table-row;
+}
+
+.hourly-forecast-item p {
+  display: table-cell;
+  padding: 8px;
+  border: 1px solid white;
+  text-align: center;
+}
+
+/* Мобільні стилі */
+@media screen and (max-width: 600px) {
+  .hourly-forecast {
+    display: block;
+  }
+
+  .hourly-forecast-item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .hourly-forecast-item p {
+    flex: 1;
+    display: block;
+  }
 }

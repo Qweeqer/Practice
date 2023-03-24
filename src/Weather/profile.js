@@ -44,25 +44,25 @@ document
   .getElementById('logout-button')
   .addEventListener('click', handleLogout);
 
-const showUserInfo = async () => {
-  const currentUser = await getCurrent();
-  const username = currentUser.name;
+// const showUserInfo = async () => {
+//   const currentUser = await getCurrent();
+//   const username = currentUser.name;
 
-  const welcomeMessage = document.createElement('p');
-  welcomeMessage.textContent = `Welcome, ${username}!`;
-  const logOutForm = document.getElementById('logout-button');
-  logOutForm.style.display = 'none';
-  const userInfo = document.getElementById('UserInfo');
+//   const welcomeMessage = document.createElement('p');
+//   welcomeMessage.textContent = `Welcome, ${username}!`;
+// //   const logOutForm = document.getElementById('logout-button');
+// //   logOutForm.style.display = 'none';
+//   const userInfo = document.getElementById('UserInfo');
 
-  if (userInfo) {
-    userInfo.appendChild(welcomeMessage);
-    userInfo.style.display = 'block';
+//   if (userInfo) {
+//     userInfo.appendChild(welcomeMessage);
+//     userInfo.style.display = 'block';
 
-    const logoutButton = document.getElementById('logout-button');
-    logoutButton.style.display = 'block';
-    logoutButton.addEventListener('click', handleLogout);
-  }
-};
+//     // const logoutButton = document.getElementById('logout-button');
+//     // logoutButton.style.display = 'block';
+//     // logoutButton.addEventListener('click', handleLogout);
+//   }
+// };
 
 const hideUserInfo = () => {
   const userInfo = document.getElementById('UserInfo');

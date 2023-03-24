@@ -102,10 +102,11 @@
         <svg class="icon-heart">
   <use xlink:href="#icon-exit"></use>
 </svg>
-    </button>
-  </nav>
+</button>
+<div id="UserInfo" style="display: none;"></div>
+</nav>
 
-  <!-- *********************************************************************** -->
+  
   <h1><i class="wi wi-horizon-alt"></i>Прогноз погоди</h1>
   <div>
     <div class="inputSearch"><input id="city-input" class="CitySearch" type="text" placeholder="Введіть місто">
@@ -131,9 +132,20 @@
   <div id="map" style="width: 100%; height: 400px;"></div>
 
   <div id="user-info" style="display: none;"></div>
-  <div id="UserInfo" style="display: none;"></div>
+  
 
+<!-- *********************************************************************** -->
+  <!-- Модальне вікно -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="closeWeatherModal">&times;</span>
+    <div id="modalWeatherInfo">
+      <!-- Тут буде відображатися детальна інформація про погоду -->
+    </div>
+  </div>
+</div>
 
+<!-- ********************************************************************************** -->
 <script type="module" src="./checkAuthorization.js"></script>
     <script type="module" src="./weather.js"></script>
     <script type="module" src="./auth.js"></script>

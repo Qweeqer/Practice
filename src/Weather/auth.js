@@ -131,18 +131,18 @@ const showUserInfo = async () => {
     userInfo.appendChild(welcomeMessage);
     userInfo.style.display = 'block';
 
-    const logoutButton = document.createElement('button');
-    logoutButton.id = 'logout-button';
-    logoutButton.textContent = 'Log Out';
-    userInfo.appendChild(logoutButton);
-    logoutButton.addEventListener('click', handleLogout);
+    // const logoutButton = document.createElement('button');
+    // logoutButton.id = 'logout-button';
+    // logoutButton.textContent = 'Log Out';
+    // userInfo.appendChild(logoutButton);
+    // logoutButton.addEventListener('click', handleLogout);
   }
 };
 
-const hideUserInfo = () => {
-  const userInfo = document.getElementById('UserInfo');
-  userInfo.style.display = 'none';
-};
+// const hideUserInfo = () => {
+//   const userInfo = document.getElementById('UserInfo');
+//   userInfo.style.display = 'none';
+// };
 
 const init = async () => {
   try {
