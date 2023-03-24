@@ -1,5 +1,5 @@
 import { getCurrent, getLogOut, setToken, getHeaders } from './auth.js';
-import { getWeatherData } from './weather.js';
+import { getWeatherData } from './getWeatherData.js';
 
 // знайти елемент з id "map"
 const mapElement = document.getElementById('map');
@@ -164,7 +164,7 @@ selectedButton.addEventListener('click', async () => {
   closeButton.addEventListener('click', () => {
     selectedModal.style.display = 'none';
     darkOverlay.style.display = 'none';
-      mapElement.style.zIndex = 0;
+    mapElement.style.zIndex = 0;
     document.body.classList.remove('modal-open');
   });
 

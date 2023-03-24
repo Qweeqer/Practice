@@ -1,36 +1,58 @@
-
+import {
+  apiKey,
+  apiUrlWeather,
+  apiUrlForecast,
+  cityInput,
+  weatherList,
+  todayButton,
+  threeDaysButton,
+  sevenDaysButton,
+} from './weatherVariables.js';
+import { getWeatherData } from './getWeatherData.js';
+import { clearWeather } from './clearWeather.js';
+// import { fetchCityByGeolocation } from './fetchCityByGeolocation.js';
+import {
+  mapElement,
+  currentMarker,
+  initMap,
+  addMarkerToMap,
+  updateMapCenter,
+  map,
+  fetchCityByGeolocationAndUpdateMap,
+  fetchCityByGeolocation,
+} from './mapService.js';
 // ********************************************************************************************
-const apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
-const apiUrlWeather = 'https://api.openweathermap.org/data/2.5/weather';
-const apiUrlForecast = 'https://api.openweathermap.org/data/2.5/forecast';
-const cityInput = document.querySelector('#city-input');
-const weatherList = document.querySelector('#weather-list');
-const todayButton = document.querySelector('#today-button');
-const threeDaysButton = document.querySelector('#three-day-button');
-const sevenDaysButton = document.querySelector('#seven-day-button');
+// const apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
+// const apiUrlWeather = 'https://api.openweathermap.org/data/2.5/weather';
+// const apiUrlForecast = 'https://api.openweathermap.org/data/2.5/forecast';
+// const cityInput = document.querySelector('#city-input');
+// const weatherList = document.querySelector('#weather-list');
+// const todayButton = document.querySelector('#today-button');
+// const threeDaysButton = document.querySelector('#three-day-button');
+// const sevenDaysButton = document.querySelector('#seven-day-button');
 
-// ********Запит для обраного**************************
-const getWeatherData = async city => {
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-  );
-  if (!response.ok) {
-    throw new Error('Failed to fetch weather data');
-  }
-  const data = await response.json();
-  return data;
-};
-// *******************END*********************************
+// // ********Запит для обраного**************************
+// const getWeatherData = async city => {
+//   const response = await fetch(
+//     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+//   );
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch weather data');
+//   }
+//   const data = await response.json();
+//   return data;
+// };
+// // *******************END*********************************
 
 // *********************clearWeather*****************************************
-const clearWeather = () => {
-  const weatherContainer = document.querySelector('.weather-container');
-  if (weatherContainer) {
-    weatherContainer.innerHTML = '';
-  }
-};
+// const clearWeather = () => {
+//   const weatherContainer = document.querySelector('.weather-container');
+//   if (weatherContainer) {
+//     weatherContainer.innerHTML = '';
+//   }
+// };
 // **********************************************************
-const fetchWeatherData = async (numDays, city = cityInput.value) => {
+export const fetchWeatherData = async (numDays, city = cityInput.value) => {
   const apiUrl = numDays === 1 ? apiUrlWeather : apiUrlForecast;
   if (!city) {
     return;
@@ -210,20 +232,20 @@ cityInput.addEventListener('change', async () => {
   addMarkerToMap(map, latitude, longitude);
 });
 
-// ..
-const fetchCityByGeolocation = async (latitude, longitude) => {
-  const response = await fetch(
-    `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`
-  );
-  const data = await response.json();
-  if (data.length > 0) {
-    cityInput.value = data[0].name;
-    updateMapCenter(map, latitude, longitude);
-    addMarkerToMap(map, latitude, longitude);
+// // ..
+// const fetchCityByGeolocation = async (latitude, longitude) => {
+//   const response = await fetch(
+//     `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`
+//   );
+//   const data = await response.json();
+//   if (data.length > 0) {
+//     cityInput.value = data[0].name;
+//     updateMapCenter(map, latitude, longitude);
+//     addMarkerToMap(map, latitude, longitude);
 
-    fetchWeatherData(1);
-  }
-};
+//     fetchWeatherData(1);
+//   }
+// };
 
 const initApp = async () => {
   if (navigator.geolocation) {
@@ -265,53 +287,53 @@ themeSwitch.addEventListener('change', () => {
   document.body.classList.toggle('dark-theme');
 });
 // ****************2*******************************************************************
-// додавання інтерактивної карти з погодними умовами API карти openstreetmap.org
-const mapElement = document.getElementById('map');
+// // додавання інтерактивної карти з погодними умовами API карти openstreetmap.org
+// const mapElement = document.getElementById('map');
 
-// Ініціалізація карти з координатами та масштабом
-let currentMarker;
-const initMap = (latitude, longitude) => {
-  const map = L.map('map').setView([latitude, longitude], 13);
-  const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-  const attribution =
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+// // Ініціалізація карти з координатами та масштабом
+// let currentMarker;
+// const initMap = (latitude, longitude) => {
+//   const map = L.map('map').setView([latitude, longitude], 13);
+//   const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+//   const attribution =
+//     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-  const tiles = L.tileLayer(tileUrl, { attribution });
-  tiles.addTo(map);
+//   const tiles = L.tileLayer(tileUrl, { attribution });
+//   tiles.addTo(map);
 
-  addMarkerToMap(map, latitude, longitude);
+//   addMarkerToMap(map, latitude, longitude);
 
-  return map;
-};
+//   return map;
+// };
 
-const addMarkerToMap = (map, lat, lng) => {
-  if (currentMarker) {
-    currentMarker.remove();
-  }
-  currentMarker = L.marker([lat, lng]).addTo(map);
-};
+// const addMarkerToMap = (map, lat, lng) => {
+//   if (currentMarker) {
+//     currentMarker.remove();
+//   }
+//   currentMarker = L.marker([lat, lng]).addTo(map);
+// };
 
-const updateMapCenter = (map, latitude, longitude, zoom = 5) => {
-  map.setView([latitude, longitude], zoom);
-};
+// const updateMapCenter = (map, latitude, longitude, zoom = 5) => {
+//   map.setView([latitude, longitude], zoom);
+// };
 
-// Виклик initMap з поточними координатами та масштабом
-const map = initMap(50.450001, 30.523333, 5);
+// // Виклик initMap з поточними координатами та масштабом
+// const map = initMap(50.450001, 30.523333, 5);
 
-// Оновлення центру карти після вибору міста
-const fetchCityByGeolocationAndUpdateMap = async (latitude, longitude) => {
-  const response = await fetch(
-    `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`
-  );
-  const data = await response.json();
-  if (data.length > 0) {
-    cityInput.value = data[0].name;
-    updateCityName(data[0].name); // цей рядок для оновлення назви міста
-    updateMapCenter(map, latitude, longitude);
-    addMarkerToMap(map, latitude, longitude);
-    fetchWeatherData(1);
-  }
-};
+// // Оновлення центру карти після вибору міста
+// const fetchCityByGeolocationAndUpdateMap = async (latitude, longitude) => {
+//   const response = await fetch(
+//     `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`
+//   );
+//   const data = await response.json();
+//   if (data.length > 0) {
+//     cityInput.value = data[0].name;
+//     updateCityName(data[0].name); // цей рядок для оновлення назви міста
+//     updateMapCenter(map, latitude, longitude);
+//     addMarkerToMap(map, latitude, longitude);
+//     fetchWeatherData(1);
+//   }
+// };
 // Для динамічної зміни назви міста в елементі <h4 class="city-name"></h4>
 const cityNameElement = document.querySelector('.city-name');
 
@@ -319,7 +341,7 @@ const updateCityName = newCityName => {
   cityNameElement.textContent = newCityName;
 };
 
-export { getWeatherData };
+
 // **************************************************************************************************
 // Отримання елементів модального вікна
 const modal = document.getElementById('myModal');
