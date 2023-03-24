@@ -110,7 +110,7 @@ const fetchWeatherData = async (numDays, city = cityInput.value) => {
       .filter((_, index) => index % 8 === 0)
       .slice(0, daysToShow);
   }
-  let index = 0;
+  // let index = 0;
   weatherData.forEach(weather => {
     const date = new Date(weather.dt * 1000);
     const dateStr = date.toLocaleDateString('uk-UA', {
@@ -385,9 +385,11 @@ document.addEventListener('click', async event => {
 });
 
 // Закриття модального вікна при натисканні на хрестик
-closeModal.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
+if (closeModal) {
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+}
 
 // Закриття модального вікна при натисканні поза його межами
 window.addEventListener('click', event => {
