@@ -1,24 +1,3 @@
-// Cтворення веб-додатку, що надає прогноз погоди на сьогодні та на наступні 3 дні з використанням безкоштовного API.
-// // Щоб реалізувати цей проект, можна використати безкоштовний API від OpenWeatherMap, який надає доступ до погодних даних у форматі JSON. Після цього можна створити веб-додаток, який запитує дані з цього API та відображає їх на сторінці.
-// // Для відображення даних на сторінці можна використати DOM дерево. Наприклад, створити список елементів, кожен з яких містить інформацію про погоду на один день. Для кожного елементу можна відображати дату, температуру, вологість, швидкість вітру та іншу інформацію. Також можна відображати графік температур для кожного дня.
-// // Крім того, можна додати функціональність вибору місця, для якого відображатиметься прогноз погоди. Це можна зробити з використанням API для геолокації, або створити власну форму вводу місця для відображення прогнозу погоди.
-// // Для більшого зручності користувачів можна також додати функціональність нотифікацій, які будуть повідомляти користувачів про зміни в погоді на наступний день.
-// // Такий проект може бути корисним для багатьох користувачів, особливо для тих, які постійно стикаються зі змінами погоди та хочуть завжди бути в курсі її прогнозу.
-
-// До додатка з прогнозом погоди можна додати ряд додаткових функцій, які забезпечать кращий користувацький досвід та більше інформації. Ось кілька ідей:
-
-// Погодні умови на певний час: Додайте можливість користувачам отримувати прогноз погоди на певний час у майбутньому. Користувачі можуть вибрати дату та час, а додаток покаже прогноз погоди на цей момент.
-// Додаткові погодні дані: Відображайте більше даних про погоду, таких як тиск, видимість, стан неба, індекс УФ-випромінювання та ймовірність опадів.
-// Пошук міст з автозаповненням: Забезпечте користувачам можливість швидкого пошуку міст за допомогою автозаповнення. Це можна зробити за допомогою API, яке надає список міст на основі введеного користувачем тексту.
-// Погодні віджети: Створіть віджети для різних платформ (Windows, macOS, Android, iOS), які відображатимуть прогноз погоди прямо на робочому столі або головному екрані користувачів.
-// Карта погоди: Додайте інтерактивну карту, яка показує поточні погодні умови, температуру або інші погодні параметри для різних місць у світі. Користувачі зможуть змінювати масштаб та переміщатися по карті, щоб перевірити погоду в інших регіонах.
-// Сповіщення про погоду: Дозвольте користувачам підписатися на сповіщення про погоду для їхнього регіону. Вони можуть отримувати попередження про негоду, шторми або інші екстремальні погодні умови.
-// Темна тема: Додайте перемикач теми,що дозволить користувачам вибирати між світлою та темною темами для вашого додатка. Темна тема може полегшити читання інформації в нічний час та забезпечити кращий користувацький досвід.
-// Багатомовність: Розширте ваш додаток, додавши підтримку кількох мов. Забезпечте переклад інтерфейсу та погодних даних на різні мови, щоб користувачі з різних країн могли користуватися вашим додатком.
-// Зберігання останнього запиту: Зберігайте останній запит користувача (місто або координати) у локальному сховищі (LocalStorage), щоб при наступному відкритті додатка автоматично відображалась погода для цього місця.
-// Соціальний обмін: Додайте кнопки для обміну прогнозом погоди у соціальних мережах, таких як Facebook, Twitter, Instagram тощо. Це дозволить користувачам швидко та легко поділитися погодними умовами та прогнозами з друзями та сім'єю.
-// Голосовий помічник: Інтегруйте ваш додаток із голосовими помічниками, такими як Google Assistant, Amazon Alexa або Apple Siri. Користувачі зможуть запитувати погоду за допомогою голосових команд.
-// Власні стилі для погодних значків: Створіть власні значки погоди, які краще підходять до стилю вашого додатка. Власні значки можуть поліпшити загальний вигляд вашого додатка та забезпечити унікальний користувацький досвід.
 
 // ********************************************************************************************
 const apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
@@ -29,7 +8,7 @@ const weatherList = document.querySelector('#weather-list');
 const todayButton = document.querySelector('#today-button');
 const threeDaysButton = document.querySelector('#three-day-button');
 const sevenDaysButton = document.querySelector('#seven-day-button');
-let clickedOnDaysButton = false;
+
 // ********Запит для обраного**************************
 const getWeatherData = async city => {
   const response = await fetch(
@@ -62,7 +41,12 @@ const fetchWeatherData = async (numDays, city = cityInput.value) => {
   );
 
   if (!response.ok) {
-    console.error('Не вдалося отримати дані погоди');
+    console.error(
+      `Не вдалося отримати дані погоди. HTTP статус: ${
+        response.status
+      }, текст відповіді: ${await response.text()}`
+    );
+
     return;
   }
 
@@ -110,7 +94,7 @@ const fetchWeatherData = async (numDays, city = cityInput.value) => {
       .filter((_, index) => index % 8 === 0)
       .slice(0, daysToShow);
   }
-  // let index = 0;
+
   weatherData.forEach(weather => {
     const date = new Date(weather.dt * 1000);
     const dateStr = date.toLocaleDateString('uk-UA', {
@@ -131,14 +115,22 @@ const fetchWeatherData = async (numDays, city = cityInput.value) => {
     const weatherItem = document.createElement('li');
     weatherItem.classList.add('WeatherWrapper');
 
-    if (weather.coord) {
+    if (weather.coord !== undefined) {
       if (!weatherItem.hasAttribute('data-latitude')) {
-        weatherItem.dataset.latitude = weather.coord.lat; // додаємо атрибут data-latitude
+        weatherItem.dataset.latitude = weather.coord.lat;
       }
       if (!weatherItem.hasAttribute('data-longitude')) {
-        weatherItem.dataset.longitude = weather.coord.lon; // додаємо атрибут data-longitude
+        weatherItem.dataset.longitude = weather.coord.lon;
       }
     } else {
+      if (weatherItem.hasAttribute('data-latitude')) {
+        weatherItem.dataset.latitude =
+          weatherItem.getAttribute('data-latitude');
+      }
+      if (weatherItem.hasAttribute('data-longitude')) {
+        weatherItem.dataset.longitude =
+          weatherItem.getAttribute('data-longitude');
+      }
       console.error('Неможливо отримати координати погоди');
     }
 
@@ -184,6 +176,7 @@ const fetchWeatherData = async (numDays, city = cityInput.value) => {
     weatherList.appendChild(weatherItem);
   });
 };
+
 // Обробник подій на інпут
 cityInput.addEventListener('change', async () => {
   const cityName = cityInput.value;
@@ -330,14 +323,14 @@ export { getWeatherData };
 // **************************************************************************************************
 // Отримання елементів модального вікна
 const modal = document.getElementById('myModal');
-console.log('modal', modal);
 const closeModal = document.querySelector('.closeWeatherModal');
-console.log('closeModal', closeModal);
 const modalWeatherInfo = document.getElementById('modalWeatherInfo');
 
 // Функція для відображення детальної інформації про погоду в модальному вікні
 const showWeatherDetailsInModal = async (latitude, longitude) => {
   const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+  // змінити z-index значення на -1
+  mapElement.style.zIndex = '-1';
 
   const response = await fetch(apiUrl);
   if (!response.ok) {
@@ -381,6 +374,7 @@ document.addEventListener('click', async event => {
     const longitude = weatherWrapper.dataset.longitude; // отримуємо довготу
     await showWeatherDetailsInModal(latitude, longitude);
     modal.style.display = 'block';
+    mapElement.style.zIndex = -1; // зміна змінної на -1
   }
 });
 
@@ -388,6 +382,7 @@ document.addEventListener('click', async event => {
 if (closeModal) {
   closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
+    mapElement.style.zIndex = 0; // зміна змінної на 0
   });
 }
 
@@ -395,6 +390,7 @@ if (closeModal) {
 window.addEventListener('click', event => {
   if (event.target === modal) {
     modal.style.display = 'none';
+    mapElement.style.zIndex = 0; // зміна змінної на 0
   }
 });
 
@@ -402,6 +398,7 @@ window.addEventListener('click', event => {
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && modal.style.display === 'block') {
     modal.style.display = 'none';
+    mapElement.style.zIndex = 0; // зміна змінної на 0
   }
 });
 // функція для відображення годинного прогнозу в модальному вікні:
@@ -423,3 +420,15 @@ const displayHourlyForecast = hourlyWeather => {
 
   return hourlyForecastHtml;
 };
+//Выдображення карти додавання слухача подій
+const mapShow = document.getElementById('map');
+
+weatherList.addEventListener('click', () => {
+  mapShow.style.zIndex = -1;
+});
+
+window.addEventListener('click', event => {
+  if (event.target === weatherList) {
+    mapShow.style.zIndex = '';
+  }
+});

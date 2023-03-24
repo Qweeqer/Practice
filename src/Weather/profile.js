@@ -1,5 +1,9 @@
 import { getCurrent, getLogOut, setToken, getHeaders } from './auth.js';
 import { getWeatherData } from './weather.js';
+
+// знайти елемент з id "map"
+const mapElement = document.getElementById('map');
+
 document.getElementById('home-button').addEventListener('click', () => {
   window.location.href = './weather.html';
 });
@@ -43,26 +47,6 @@ document
 document
   .getElementById('logout-button')
   .addEventListener('click', handleLogout);
-
-// const showUserInfo = async () => {
-//   const currentUser = await getCurrent();
-//   const username = currentUser.name;
-
-//   const welcomeMessage = document.createElement('p');
-//   welcomeMessage.textContent = `Welcome, ${username}!`;
-// //   const logOutForm = document.getElementById('logout-button');
-// //   logOutForm.style.display = 'none';
-//   const userInfo = document.getElementById('UserInfo');
-
-//   if (userInfo) {
-//     userInfo.appendChild(welcomeMessage);
-//     userInfo.style.display = 'block';
-
-//     // const logoutButton = document.getElementById('logout-button');
-//     // logoutButton.style.display = 'block';
-//     // logoutButton.addEventListener('click', handleLogout);
-//   }
-// };
 
 const hideUserInfo = () => {
   const userInfo = document.getElementById('UserInfo');
@@ -123,6 +107,7 @@ selectedButton.addEventListener('click', async () => {
     alert('Ви ще не додали будь-яке місто в обране');
     return;
   }
+  mapElement.style.zIndex = -1;
   const cityList = document.createElement('ul');
   cityList.classList.add('cityList');
   document.body.classList.add('modal-open');
@@ -179,6 +164,7 @@ selectedButton.addEventListener('click', async () => {
   closeButton.addEventListener('click', () => {
     selectedModal.style.display = 'none';
     darkOverlay.style.display = 'none';
+      mapElement.style.zIndex = 0;
     document.body.classList.remove('modal-open');
   });
 

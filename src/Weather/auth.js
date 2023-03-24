@@ -1,10 +1,6 @@
 const BASE_URL = 'https://connections-api.herokuapp.com';
 let token = '';
 
-// export const setToken = newToken => {
-//   token = newToken;
-// };
-
 export const setToken = newToken => {
   token = newToken;
   localStorage.setItem('authToken', newToken);
@@ -22,11 +18,6 @@ export const getHeaders = () => {
     Authorization: `Bearer ${token}`,
   };
 };
-
-// const headers = {
-//   'Content-Type': 'application/json',
-//   Authorization: `Bearer ${token}`,
-// };
 
 const getSignUp = async data => {
   const options = {
@@ -73,7 +64,6 @@ export const getLogOut = async () => {
 
 export const getCurrent = async () => {
   if (!token) {
-    // console.log('Token is not set');
     return null;
   }
 
@@ -84,7 +74,6 @@ export const getCurrent = async () => {
 
   try {
     const response = await fetch(`${BASE_URL}/users/current`, options);
-    // console.log('Response status:', response.status);
 
     if (response.status === 401) {
       setToken('');
@@ -92,7 +81,6 @@ export const getCurrent = async () => {
     }
 
     const data = await response.json();
-    // console.log('User data:', data);
     return data;
   } catch (error) {
     setToken('');
@@ -130,19 +118,13 @@ const showUserInfo = async () => {
   if (userInfo) {
     userInfo.appendChild(welcomeMessage);
     userInfo.style.display = 'block';
-
-    // const logoutButton = document.createElement('button');
-    // logoutButton.id = 'logout-button';
-    // logoutButton.textContent = 'Log Out';
-    // userInfo.appendChild(logoutButton);
-    // logoutButton.addEventListener('click', handleLogout);
   }
 };
 
-// const hideUserInfo = () => {
-//   const userInfo = document.getElementById('UserInfo');
-//   userInfo.style.display = 'none';
-// };
+const hideUserInfo = () => {
+  const userInfo = document.getElementById('UserInfo');
+  userInfo.style.display = 'none';
+};
 
 const init = async () => {
   try {
@@ -174,7 +156,6 @@ if (registerForm) {
     } else {
       errorMessage.textContent = '';
       alert('Thank you! Your account has been successfully created!');
-      //   registerForm.reset();
       updateSubmitButtonState();
     }
     updateSubmitButtonState();
@@ -242,73 +223,6 @@ if (loginForm) {
 }
 
 // *******************END********************************************
-// const handleTodayButtonClick = async () => {
-//   try {
-//     const response = await fetch(`${BASE_URL}/today`, {
-//       headers: getHeaders(),
-//     });
-//     const data = await response.json();
-//     displayWeatherData(data);
-//   } catch (error) {
-//     console.error(error);
-//     alert('Weather get Error');
-//   }
-// };
-
-// const handleThreeDayButtonClick = async () => {
-//   try {
-//     const response = await fetch(`${BASE_URL}/three`, {
-//       headers: getHeaders(),
-//     });
-//     const data = await response.json();
-//     displayWeatherData(data);
-//   } catch (error) {
-//     console.error(error);
-//     alert('Weather get Error');
-//   }
-// };
-
-// const handleSevenDayButtonClick = async () => {
-//   try {
-//     const response = await fetch(`${BASE_URL}/seven`, {
-//       headers: getHeaders(),
-//     });
-//     const data = await response.json();
-//     displayWeatherData(data);
-//   } catch (error) {
-//     console.error(error);
-//     alert('Weather get Error');
-//   }
-// };
-
-// const displayWeatherData = data => {
-//   const weatherContainer = document.getElementById('weather-container');
-//   weatherContainer.innerHTML = '';
-
-//   data.forEach(day => {
-//     const { date, description, temperature, humidity } = day;
-//     const dayContainer = document.createElement('div');
-//     dayContainer.classList.add('weather-day');
-
-//     const dateElement = document.createElement('p');
-//     dateElement.textContent = date;
-//     dayContainer.appendChild(dateElement);
-
-//     const descriptionElement = document.createElement('p');
-//     descriptionElement.textContent = description;
-//     dayContainer.appendChild(descriptionElement);
-
-//     const temperatureElement = document.createElement('p');
-//     temperatureElement.textContent = `Температура: ${temperature} °C`;
-//     dayContainer.appendChild(temperatureElement);
-
-//     const humidityElement = document.createElement('p');
-//     humidityElement.textContent = `Вологість: ${humidity} %`;
-//     dayContainer.appendChild(humidityElement);
-
-//     weatherContainer.appendChild(dayContainer);
-//   });
-// };
 
 // ініціалізація додатка
 document.addEventListener('DOMContentLoaded', () => {
@@ -427,30 +341,3 @@ if (registerForm) {
 
 // **********************************************
 
-// *********************NOTE***********************
-// const updateUserInfo = async () => {
-//   try {
-//     const currentUser = await getCurrent(); // получаем данные о текущем пользователе
-//     const userInfo = document.getElementById('user-info');
-//     userInfo.innerHTML = `Hello, ${currentUser.name} (${currentUser.email})`; // обновляем элемент с информацией о пользователе
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// const handleLogin = async event => {
-//   event.preventDefault();
-//   const email = document.getElementById('login-email').value;
-//   const password = document.getElementById('login-password').value;
-//   const loginData = { email, password };
-
-//   try {
-//     const result = await getLogIn(loginData);
-//     setToken(result.token);
-//     updateUserInfo(); // обновляем элемент с информацией о пользователе
-//     login.style.display = 'none';
-//     dark.style.display = 'none';
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };

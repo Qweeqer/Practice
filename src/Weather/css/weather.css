@@ -351,6 +351,7 @@ body.dark-theme li {
   padding: 1em;
   display: block;
   background-color: var(--back-pop-up);
+  z-index: 1000;
   /* width: 25em; */
   text-align: center;
   box-sizing: border-box;
@@ -435,13 +436,12 @@ body.dark-theme li {
 .buttons {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding-bottom: 0.05em;
   background-color: var(--text-pop-up);
   border-bottom: 0.3em solid darken(var(--back-pop-up), 30%);
 }
-
 .buttons button {
   box-sizing: border-box;
   width: 8em;
@@ -460,3 +460,45 @@ body.dark-theme li {
   background-color: #51c4c4;
   color: #ffff00;
 }
+@media screen and (max-width: 767px) {
+  .buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #UserInfo {
+    width: 100%;
+        border-top: 4px solid white;
+  }
+}
+@media screen and (min-width: 768px) {
+  .buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 0.05em;
+  background-color: var(--text-pop-up);
+  border-bottom: 0.3em solid darken(var(--back-pop-up), 30%);
+}
+.buttons button {
+  box-sizing: border-box;
+  width: 8em;
+  padding: 1em;
+  font-size: 1.3em;
+  font-family: 'Comfortaa', cursive;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+
+.buttons button:hover {
+  background-color: #51c4c4;
+  color: #ffff00;
+}
+}
+
