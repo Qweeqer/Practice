@@ -341,7 +341,6 @@ const updateCityName = newCityName => {
   cityNameElement.textContent = newCityName;
 };
 
-
 // **************************************************************************************************
 // Отримання елементів модального вікна
 const modal = document.getElementById('myModal');
@@ -442,7 +441,7 @@ const displayHourlyForecast = hourlyWeather => {
 
   return hourlyForecastHtml;
 };
-//Выдображення карти додавання слухача подій
+//Відображення карти додавання слухача подій
 const mapShow = document.getElementById('map');
 
 weatherList.addEventListener('click', () => {
