@@ -1,7 +1,3 @@
-import './registerForm.js';
-import { registerForm } from './registerForm.js';
-import './loginForm.js';
-
 const BASE_URL = 'https://connections-api.herokuapp.com';
 let token = '';
 
@@ -23,7 +19,7 @@ export const getHeaders = () => {
   };
 };
 
-export const getSignUp = async data => {
+const getSignUp = async data => {
   const options = {
     method: 'POST',
     headers: getHeaders(),
@@ -36,7 +32,7 @@ export const getSignUp = async data => {
   return result;
 };
 
-export const getLogIn = async data => {
+const getLogIn = async data => {
   const options = {
     method: 'POST',
     headers: getHeaders(),
@@ -93,7 +89,7 @@ export const getCurrent = async () => {
   }
 };
 
-export const handleLogout = async () => {
+const handleLogout = async () => {
   try {
     await getLogOut();
     hideUserInfo();
@@ -105,7 +101,7 @@ export const handleLogout = async () => {
   }
 };
 
-export const showUserInfo = async () => {
+const showUserInfo = async () => {
   const currentUser = await getCurrent();
   const username = currentUser.name;
   const welcomeMessage = document.createElement('p');
@@ -143,6 +139,90 @@ const init = async () => {
     hideUserInfo();
   }
 };
+// *******************registerForm*************************************
+const registerForm = document.getElementById('register-form');
+if (registerForm) {
+  registerForm.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const { firstName, email, password, confirmPassword } =
+      event.target.elements;
+    // Валідація
+
+    if (!validateForm()) {
+      errorMessage.textContent =
+        'Please fill in all fields and agree to the Terms of Use.';
+      return;
+    } else {
+      errorMessage.textContent = '';
+      alert('Thank you! Your account has been successfully created!');
+      updateSubmitButtonState();
+    }
+    updateSubmitButtonState();
+    /////
+    try {
+      await getSignUp({
+        name: firstName.value,
+        email: email.value,
+        password: password.value,
+        confirmPassword: confirmPassword.value,
+      });
+
+      setTimeout(async () => {
+        const userContainer = document.getElementById('UserInfo');
+        const user = await getCurrent();
+        console.log('user', user);
+        if (user) {
+          userContainer.innerHTML = `<p>Ім’я користувача: ${user.name}</p> <p>Email: ${user.email}</p>`;
+
+          const logoutButton = document.createElement('button');
+          logoutButton.id = 'logout-button';
+          logoutButton.textContent = 'Log Out';
+          userContainer.appendChild(logoutButton);
+          logoutButton.addEventListener('click', handleLogout);
+
+          register.style.display = 'none';
+          dark.style.display = 'none';
+          showUserInfo();
+          window.location.href = 'profile.html';
+        } else {
+          throw new Error('User is null');
+        }
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+      alert('Registration Error: ' + error);
+    }
+  });
+}
+// *******************END********************************************
+// ******************LOGIN FORM******************************************
+const loginForm = document.getElementById('login-form');
+
+if (loginForm) {
+  loginForm.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const { email, password } = event.target.elements;
+
+    try {
+      await getLogIn({
+        email: email.value,
+        password: password.value,
+      });
+      // Токен вже збережений у localStorage усередині функції setToken
+      login.style.display = 'none';
+      dark.style.display = 'none';
+      showUserInfo();
+      window.location.href = 'profile.html';
+    } catch (error) {
+      console.error(error);
+      alert('Login Error: ' + error);
+    }
+  });
+}
+
+// *******************END********************************************
 
 // ініціалізація додатка
 document.addEventListener('DOMContentLoaded', () => {
@@ -153,8 +233,8 @@ let regButton = document.getElementById('reg-button');
 let logButton = document.getElementById('log-button');
 let buttonX1 = document.getElementById('button-x1');
 let buttonX2 = document.getElementById('button-x2');
-export let register = document.getElementById('Register');
-export let login = document.getElementById('Login');
+let register = document.getElementById('Register');
+let login = document.getElementById('Login');
 let dark = document.getElementById('dark');
 
 if (regButton) {
@@ -184,14 +264,14 @@ if (buttonX2) {
   });
 }
 // *******************Валідація**********************
-export const errorMessage = document.querySelector('.error-message');
+const errorMessage = document.querySelector('.error-message');
 const submitButton = document.getElementById('submitButton');
 const firstName = document.getElementById('first-name-input');
 const email = document.getElementById('email-input');
 const password = document.getElementById('password-input');
 const confirmPassword = document.getElementById('confirm-password-input');
 const agreeCheckbox = document.getElementById('agreeCheckbox');
-export function validateForm() {
+function validateForm() {
   let isValid = true;
   // Перевірка усіх полів вводу та чекбокса
   if (
@@ -244,7 +324,7 @@ if (agreeCheckbox) {
   });
 }
 // ***************Оновлення статусу полів та відповідно кнопки сабміту*******************************
-export function updateSubmitButtonState() {
+function updateSubmitButtonState() {
   submitButton.disabled = !validateForm();
 }
 if (registerForm) {
